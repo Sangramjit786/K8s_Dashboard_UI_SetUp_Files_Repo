@@ -99,3 +99,56 @@ kubectl -n kubernetes-dashboard create token admin-user
 ```bash
 kubectl get clusterrolebinding,rolebinding -n kubernetes-dashboard
 ```
+
+## Cleanup
+To completely remove the Kubernetes Dashboard and all related resources:
+
+```bash
+# Delete dashboard deployment
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+# Delete admin user and role binding
+kubectl delete -f dashboard-adminuser.yaml
+kubectl delete -f dashboard-rolebinding.yaml
+kubectl delete -f secret.yaml
+
+# Optional: Remove the namespace (this will delete all resources in the namespace)
+kubectl delete namespace kubernetes-dashboard
+```
+
+## Configuration Files
+### 1. dashboard-adminuser.yaml
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+```
+
+### 2. dashboard-rolebinding.yaml
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+```
+### 3. secret.yaml
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+  labels:
+    kubernetes.io/service-account.name: admin-user
+type: kubernetes.io/service-account-token
+```
