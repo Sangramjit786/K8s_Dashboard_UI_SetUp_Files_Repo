@@ -76,3 +76,26 @@ kubectl port-forward -n kubernetes-dashboard <pod-name> 8443:8443
 ```
 https://localhost:8443
 ```
+
+## Troubleshooting
+### Common Issues
+**1. Dashboard not accessible**
+- Ensure Kubernetes is running in Docker Desktop
+- Check if all pods are running:
+```bash
+kubectl get pods -n kubernetes-dashboard
+```
+**2. Authentication issues**
+- Verify the secret was created:
+```bash
+kubectl get secret -n kubernetes-dashboard
+```
+- Get a new token if needed
+```bash
+kubectl -n kubernetes-dashboard create token admin-user
+```
+**3. RBAC permission errors**
+- Make sure the role bindings are correctly applied:
+```bash
+kubectl get clusterrolebinding,rolebinding -n kubernetes-dashboard
+```
