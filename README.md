@@ -120,11 +120,11 @@ kubernetes/
 ---
 ## Key Features:
 
-Zero-downtime deployments
-Horizontal pod autoscaling
-Resource management
-Health checks
-Service discovery
+- Zero-downtime deployments
+- Horizontal pod autoscaling
+- Resource management
+- Health checks
+- Service discovery
 
 ---
 
@@ -160,14 +160,14 @@ kubectl describe pod <pod-name> -n banking
 kubectl logs <pod-name> -n banking
 ```
 ### 2. Service Discovery Issues
-Verify Eureka server is running
-Check service registration in Eureka dashboard
-Verify network policies
+- Verify Eureka server is running
+- Check service registration in Eureka dashboard
+- Verify network policies
 
 ### 3. Configuration Problems
-Check ConfigMap values
-Verify environment variables in pods
-Check ConfigServer logs
+- Check ConfigMap values
+- Verify environment variables in pods
+- Check ConfigServer logs
 
 ## Viewing Logs
 ```bash
