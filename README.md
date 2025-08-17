@@ -152,3 +152,22 @@ metadata:
     kubernetes.io/service-account.name: admin-user
 type: kubernetes.io/service-account-token
 ```
+
+## ✅ Why This Setup?
+
+- dashboard-adminuser.yaml → Ensures a dedicated ServiceAccount for dashboard login.
+- dashboard-rolebinding.yaml → Provides cluster-wide access for managing resources.
+- secret.yaml → Generates secure tokens for authentication.
+This setup ensures developers can securely manage deployments, services, and pods via a friendly web UI instead of relying only on kubectl.
+
+## 📌 Next Steps
+
+- Restrict privileges by using Role-based Access Control (RBAC) instead of full cluster-admin in production.
+- Secure dashboard access with Ingress + TLS for external access.
+- Automate secret rotation using Kubernetes controllers.
+
+## 🔗 References
+
+- SpringBoot Banking Services Project
+- Kubernetes Dashboard Docs
+- Docker Desktop Kubernetes
